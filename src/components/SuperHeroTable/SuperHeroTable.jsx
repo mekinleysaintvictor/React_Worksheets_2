@@ -10,12 +10,12 @@ const SuperHeroTable = (props) => {
                     <th> Secondary Ability </th>
                 </tr>
                 {props.superheroes.map((hero) => {
-                return (
-                    <tr className= "heroDetails">
-                        <th> {hero.name} </th>
-                        <th> {hero.primaryAbility} </th>
-                        <th> {hero.secondaryAbility} </th>
-                    </tr>
+                    return (
+                        <tr className= "heroDetails">
+                            <th> {hero.name} </th>
+                            <th> {hero.primaryAbility} </th>
+                            <th> {hero.secondaryAbility} </th>
+                        </tr>
                 )
             })}
             </table>
