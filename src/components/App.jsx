@@ -1,15 +1,23 @@
 import React, { Component } from 'react';
+import DisplayName from './DisplayName/DisplayName';
 
 class App extends Component {
     constructor(props) {
         super(props);
-        this.state = {  }
+        this.names = [
+            'Thomas', 'Sarah', 'Lindia', 'Jennifer', 'Akeem'
+        ];
+
+        this.state = { 
+            firstName: 'Reggie',
+            lastName: 'White'
+         }
     }
 
     render() { 
         return ( 
             <div className="container-fluid">
-                <h1> Hello World</h1>
+                <DisplayName firstName= {this.state.firstName} lastName= {this.state.lastName} />
             </div>
          );
     }
