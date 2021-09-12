@@ -4,7 +4,7 @@ import NamesList from './NamesList/NamesList';
 import AlertUser from './AlertUser/AlertUser';
 import SuperHeroTable from './SuperHeroTable/SuperHeroTable';
 import SuperheroCreateForm from './SuperheroCreateForm/SuperheroCreateForm';
-
+import axios from 'axios';
 
 class App extends Component {
     constructor(props) {
@@ -16,6 +16,7 @@ class App extends Component {
         this.state = { 
             firstName: 'Reggie',
             lastName: 'White',
+            jokesFromApi: [],
             supers: [
                 {
                     superheroId: 1,
@@ -37,6 +38,18 @@ class App extends Component {
                 }
             ]
          }
+    }
+
+    componentDidMount(){
+        this.getJokes();
+    }
+
+    async getJokes(){
+        let response = await axios.get('https://v2.jokeapi.dev/joke/Programming?amount=5');
+        console.log(response.data.jokes);
+        this.setState({
+            jokesFromApi: response.data.jokes
+        })
     }
 
     addHeroToSupers = (heroToAdd) => {
@@ -61,6 +74,12 @@ class App extends Component {
                 <AlertUser buttonClick = {(message) => this.display(message)} />
                 <SuperHeroTable superheroes = {this.state.supers} />
                 <SuperheroCreateForm addNewHero={this.addHeroToSupers} />
+                
+                <h1>Jokes from API</h1>
+                <hr/>
+                {this.state.jokesFromApi.map(joke => {
+                    return <h1>{joke.setup} : {joke.delivery}</h1>
+                })}
             </div>
          );
     }
